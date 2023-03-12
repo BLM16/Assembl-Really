@@ -1,0 +1,14 @@
+[package]
+name = "assembl-really"
+version = "0.1.0"
+authors = ["Bradley Myers"]
+edition = "2021"
+description = "An assembly language interpreter that has absolutely no benefit."
+readme = "README.md"
+repository = "https://github.com/BLM16/Assembl-Really/"
+license-file = "LICENSE"
+keywords = ["assembly", "assembl-really", "assembler", "asm"]
+categories = ["command-line-utilities", "compilers"]
+publish = false
+
+[dependencies]
