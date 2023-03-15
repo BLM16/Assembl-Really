@@ -11,4 +11,9 @@ keywords = ["assembly", "assembl-really", "assembler", "asm"]
 categories = ["command-line-utilities", "compilers"]
 publish = false
 
+[[bin]]
+name = "asmr"
+path = "src/bin/asmr/bin.rs"
+
 [dependencies]
+strum = { version = "0.24", features = ["derive"] }
