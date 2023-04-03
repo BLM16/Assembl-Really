@@ -1,6 +1,6 @@
 use std::{io::{self, BufRead}, path::Path, fs::File, env};
 
-use assembl_really::parser;
+use assembl_really as asmr;
 
 fn main() {
     let args: Vec<_> = env::args().collect();
@@ -12,17 +12,15 @@ fn main() {
     // Get the input asmr file
     let file_path = &args[1];
 
-    match read_lines(file_path.trim()) {
-        Ok(file_lines) => {
-            match parser::parse_lines(file_lines.filter(|r| r.is_ok()).map(|r| r.unwrap())) {
-                Ok(lines) => {
-                    println!("{:#?}", lines);
-                },
-                Err(e) => eprintln!("{}", e),
-            }
-        },
-        Err(e) => eprintln!("{}", e),
-    }
+    // Read the file by line
+    let lines = read_lines(file_path.trim()).unwrap()
+                    .filter(|r| r.is_ok())
+                    .map(|r| r.unwrap());
+                
+    // Parse the file into an AST
+    let ast = asmr::parse_lines(lines).unwrap();
+
+    println!("{:#?}", ast);
 }
 
 /// Reads the specified file by line with a BufReader.
