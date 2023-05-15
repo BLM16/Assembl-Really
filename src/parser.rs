@@ -1,7 +1,7 @@
-mod error;
-mod instruction;
-mod line;
-mod token;
+pub mod error;
+pub mod instruction;
+pub mod line;
+pub mod token;
 
 use self::{error::ParserError, instruction::Instruction, line::{Line, MemType}, token::Token};
 

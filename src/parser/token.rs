@@ -72,10 +72,10 @@ mod tests {
     #[test]
     fn token_from_str_parses_register_name() -> Result<(), String> {
         let t1 = Token::from_str("eax")?;
-        let t2 = Token::from_str("bp")?;
+        let t2 = Token::from_str("ebp")?;
         
         assert_eq!(t1, Token::Register(RegisterName::Eax));
-        assert_eq!(t2, Token::Register(RegisterName::Bp));
+        assert_eq!(t2, Token::Register(RegisterName::Ebp));
 
         Ok(())
     }

@@ -10,25 +10,9 @@ pub enum RegisterName {
     Ebx,
     Ecx,
     Edx,
-    Ax,
-    Bx,
-    Cx,
-    Dx,
 
 // Pointers
     Eip,
     Esp,
     Ebp,
-    Ip,
-    Sp,
-    Bp,
-
-// Indicies
-    Esi,
-    Edi,
-    Si,
-    Di,
-
-// Flags
-    Flags,
 }

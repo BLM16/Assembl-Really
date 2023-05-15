@@ -13,7 +13,6 @@ pub enum Instruction {
 
 // Move
     Mov,
-    Lea,
     Xchg,
     
 // Arithmetic
@@ -21,11 +20,8 @@ pub enum Instruction {
     Sub,
     Mul,
     Div,
-    
     Inc,
     Dec,
-    Neg,
-    
     Shl,
     Shr,
     
@@ -38,6 +34,7 @@ pub enum Instruction {
     Test,
     
 // Jumps
+    Jmp,
     Jz,
     Jnz,
     Jg,
