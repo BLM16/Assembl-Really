@@ -13,7 +13,7 @@ use std::{iter::Iterator, str::FromStr};
 /// 
 /// ```
 /// # use assembl_really::parser::parse_lines;
-/// let v = vec!["push 5", "call asmr::io::println"];
+/// let v = vec!["push 5", "call asmr::io::print"];
 /// let lines = parse_lines(v.iter());
 /// ```
 pub fn parse_lines<L, S>(lines: L) -> Result<Vec<Line>, ParserError>
