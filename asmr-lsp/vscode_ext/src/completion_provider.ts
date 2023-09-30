@@ -19,6 +19,12 @@ export class AsmrCompletionItemProvider implements vscode.CompletionItemProvider
                 case asmr.CompletionType.Label:
                     completionItem.kind = vscode.CompletionItemKind.Reference;
                     break;
+                case asmr.CompletionType.Register:
+                    completionItem.kind = vscode.CompletionItemKind.Value;
+                    break;
+                case asmr.CompletionType.Instruction:
+                    completionItem.kind = vscode.CompletionItemKind.Keyword;
+                    break;
 
                 default:
                     throw new Error(`Invalid CompletionItem type encountered.`);

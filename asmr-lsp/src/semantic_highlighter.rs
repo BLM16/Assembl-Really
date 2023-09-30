@@ -13,6 +13,7 @@ pub fn parse_file_tokens(file_contents: &str) -> String {
     let lines = asmr::parse_lines(file_lines.iter()).unwrap_throw();
     let mut tokens: Vec<SemanticToken> = Vec::new();
     
+    // Track all labels for highlighting
     let mut identifiers: Vec<&String> = Vec::new();
     for i in 0..lines.len() {
         if let Some(Line::Label(label)) = lines.get(i) {
@@ -56,6 +57,7 @@ pub fn parse_file_tokens(file_contents: &str) -> String {
     json::to_string(&tokens).unwrap_throw()
 }
 
+/// Parses the parameters for an instruction into semantic tokens.
 fn parse_params(params: &Vec<Token>, line: &str, line_idx: usize, identifiers: &Vec<&String>) -> Vec<SemanticToken> {
     let mut tokens: Vec<SemanticToken> = Vec::new();
 
@@ -111,6 +113,7 @@ impl SemanticToken {
     }
 }
 
+/// The types of asmr semantic tokens
 pub enum SemanticTokenType {
     Variable,
     Function,

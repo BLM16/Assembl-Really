@@ -1,8 +1,8 @@
-use strum::EnumString;
+use strum::{EnumString, EnumIter, Display};
 
 /// https://github.com/michaelsergio/nasm-instruction-set/blob/master/README.md
 #[derive(Debug, PartialEq)]
-#[derive(EnumString)]
+#[derive(EnumString, EnumIter, Display)]
 #[strum(serialize_all = "snake_case")]
 pub enum Instruction {
     Nop,

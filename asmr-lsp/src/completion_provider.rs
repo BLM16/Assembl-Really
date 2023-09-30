@@ -2,8 +2,11 @@ use wasm_bindgen::prelude::*;
 use serde_json as json;
 use serde::Serialize;
 
+use strum::IntoEnumIterator;
+
 use assembl_really as asmr;
-use asmr::parser::line::Line;
+use asmr::core::register::RegisterName;
+use asmr::parser::{line::Line, instruction::Instruction};
 
 /// Parses an asmr file into an array of completion items for intellisense.
 /// Returns a JSON encoded `CompletionItem[]`.
@@ -30,7 +33,7 @@ pub fn get_completion_items(file_contents: &str) -> String {
         };
     }
 
-    // TODO: Add registers, instruction
+    // Register builtin functions
     completion_items.push(CompletionItem {
         token_name: "asmr::io::print".to_string(),
         token_type: CompletionType::Function,
@@ -38,6 +41,22 @@ pub fn get_completion_items(file_contents: &str) -> String {
     completion_items.push(CompletionItem {
         token_name: "asmr::io::readln".to_string(),
         token_type: CompletionType::Function,
+    });
+
+    // Register registers
+    RegisterName::iter().for_each(|r| {
+        completion_items.push(CompletionItem {
+            token_name: r.to_string(),
+            token_type: CompletionType::Register,
+        });
+    });
+
+    // Register instructions
+    Instruction::iter().for_each(|r| {
+        completion_items.push(CompletionItem {
+            token_name: r.to_string(),
+            token_type: CompletionType::Instruction,
+        });
     });
 
     json::to_string(&completion_items).unwrap_throw()
@@ -69,4 +88,6 @@ pub enum CompletionType {
     Variable,
     Function,
     Label,
+    Register,
+    Instruction,
 }

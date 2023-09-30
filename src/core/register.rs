@@ -1,6 +1,6 @@
 use std::ops::{AddAssign, SubAssign, MulAssign, DivAssign, ShlAssign, ShrAssign, BitAndAssign, BitOrAssign, BitXorAssign};
 
-use strum::{EnumString, EnumIter};
+use strum::{EnumString, EnumIter, Display};
 
 #[derive(Clone, Copy)]
 pub struct Register {
@@ -15,7 +15,7 @@ pub enum RegisterData {
 
 /// https://www.tutorialspoint.com/assembly_programming/assembly_registers.htm
 #[derive(Debug, Eq, Hash, PartialEq)]
-#[derive(EnumString, EnumIter)]
+#[derive(EnumString, EnumIter, Display)]
 #[strum(serialize_all = "snake_case")]
 pub enum RegisterName {
 // Data

@@ -13,8 +13,10 @@ pub fn get_document_symbols(file_contents: &str) -> String {
     let lines = asmr::parse_lines(file_lines.iter()).unwrap_throw();
     let mut symbols: Vec<DocumentSymbol> = Vec::new();
     
+    // Tracks the current label that symbols are under
     let mut current_label: Option<(String, usize)> = None;
-    let mut push_label = |name, kind, start, i| symbols.push(DocumentSymbol {
+
+    let mut push_symbol = |name, kind, start, i| symbols.push(DocumentSymbol {
         token_name: name,
         token_type: kind,
         range: Range {
@@ -24,19 +26,26 @@ pub fn get_document_symbols(file_contents: &str) -> String {
             char_end: file_lines.get(i).unwrap().len(),
         }
     });
+
     for i in 0..lines.len() {
         if let Some(Line::Label(label)) = lines.get(i) {
+            // Push existing label if it exists
             if let Some(cur) = current_label {
-                push_label(cur.0, SymbolType::Label, cur.1, i - 1);
+                push_symbol(cur.0, SymbolType::Label, cur.1, i - 1);
             }
+
+            // Set current label
             current_label = Some((label.clone(), i));
         }
         else if let Some(Line::Variable { identifier, .. }) = lines.get(i) {
-            push_label(identifier.clone(), SymbolType::Variable, i, i);
+            push_symbol(identifier.clone(), SymbolType::Variable, i, i);
         }
     }
-    let cur = current_label.unwrap();
-    push_label(cur.0, SymbolType::Label, cur.1, lines.len() - 1);
+
+    // Push remaining label if one exists
+    if let Some(cur) = current_label {
+        push_symbol(cur.0, SymbolType::Label, cur.1, lines.len() - 1);
+    }
 
     json::to_string(&symbols).unwrap_throw()
 }
