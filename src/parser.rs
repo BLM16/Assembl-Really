@@ -140,11 +140,15 @@ fn parse_line(line: &str, line_number: i32) -> Result<Line, ParserError>
 }
 
 /// Checks whether a given string is a valid asmr identifier.
-fn is_valid_identifier(s: &str) -> bool {
+pub fn is_valid_identifier(s: &str) -> bool {
     if let Some(first) = s.chars().next() {
-        if !first.is_alphabetic() && first != '_' && first != '.' {
+        if !first.is_ascii_alphabetic() && first != '_' && first != '.' {
             return false;
         }
+    }
+    else {
+        // Must be at least 1 character long
+        return false;
     }
 
     for c in s.chars() {

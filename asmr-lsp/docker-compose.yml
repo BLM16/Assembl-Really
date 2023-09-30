@@ -1,0 +1,8 @@
+services:
+  asmr-lsp:
+    container_name: asmr-lsp
+    image: asmr-lsp-wasm-pack
+    build: .
+    volumes:
+      - ..:/mnt/asmr
+      - ./vscode_ext/src:/mnt/vscode_ext

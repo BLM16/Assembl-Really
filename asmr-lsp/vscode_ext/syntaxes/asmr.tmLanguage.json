@@ -1,0 +1,81 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Assembl-Really",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#instructions" },
+		{ "include": "#registers" },
+		{ "include": "#variables" },
+		{ "include": "#strings" },
+		{ "include": "#numeric" }
+	],
+	"repository": {
+		"comments": {
+			"name": "comment.line.asmr",
+			"begin": ";",
+			"end": "$"
+		},
+		"instructions": {
+			"patterns": [
+				{
+					"name": "keyword.control.nop.asmr",
+					"match": "\\bnop\\b"
+				},
+				{
+					"name": "keyword.control.stack.asmr",
+					"match": "\\b(push|pop)\\b"
+				},
+				{
+					"name": "keyword.control.move.asmr",
+					"match": "\\b(mov|xchg)\\b"
+				},
+				{
+					"name": "keyword.control.arithmetic.asmr",
+					"match": "\\b(add|sub|mul|div|inc|dec|shl|shr)\\b"
+				},
+				{
+					"name": "keyword.control.comparisons.asmr",
+					"match": "\\b(cmp|and|or|not|xor|test)\\b"
+				},
+				{
+					"name": "keyword.control.jumps.asmr",
+					"match": "\\b(jmp|jz|jnz|jg|jl|jge|jle|je|jne)\\b"
+				},
+				{
+					"name": "keyword.control.functions.asmr",
+					"match": "\\b(call|ret)\\b"
+				}
+			]
+		},
+		"registers": {
+			"name": "storage.asmr",
+			"match": "\\b(eax|ebx|ecx|edx|eip|esp|ebp)\\b"
+		},
+		"variables": {
+			"name": "keyword.control.asmr",
+			"match": "\\b(db|resb)\\b"
+		},
+		"strings": {
+			"name": "string.quoted.double.asmr",
+			"begin": "\"",
+			"end": "\""
+		},
+		"numeric": {
+			"patterns": [
+				{
+					"name": "constant.numeric.dec.asmr",
+					"match": "\\b[0-9]+\\b"
+				},
+				{
+					"name": "constant.numeric.hex.asmr",
+					"match": "\\b0x[0-9a-fA-F]+\\b"
+				},
+				{
+					"name": "constant.numeric.bin.asmr",
+					"match": "\\b0b[01]+\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.asmr"
+}

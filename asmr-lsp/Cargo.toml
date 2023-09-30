@@ -1,0 +1,19 @@
+[package]
+name = "asmr-lsp"
+version = "0.1.0"
+authors = ["Bradley Myers"]
+edition = "2021"
+description = "The language server protocol for the Assembl-Really programming language."
+repository = "https://github.com/BLM16/Assembl-Really"
+keywords = ["assembly", "assembl-really", "assembler", "asm", "lsp", "language server protocol"]
+categories = ["development-tools", "wasm"]
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+assembl-really = { path = ".." }
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = "1.0.96"
+wasm-bindgen = "0.2.86"
